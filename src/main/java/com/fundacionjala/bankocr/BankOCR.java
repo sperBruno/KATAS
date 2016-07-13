@@ -11,12 +11,12 @@ import java.util.List;
 public class BankOCR {
 
     private static final String INPUT_FILE_NAME = "accountsOCR.txt";
-    private static final int COLS_DIGITS = 3;
-    private static final int ROWS_DIGITS = 3;
-    private static final int NUMBER_DIGITS = 9;
     private static final String ILLEGIBLE_NUMBER = "?";
     private static final String ILLEGIBLE_MESSAGE = "ILLEGIBLE_MESSAGE";
     private static final String ERROR_MESSAGE = "ERROR_MESSAGE";
+    private static final int COLS_DIGITS = 3;
+    private static final int ROWS_DIGITS = 3;
+    private static final int NUMBER_DIGITS = 9;
 
     private List<String> numberAccountsList;
 
@@ -32,9 +32,7 @@ public class BankOCR {
             String account = convertOcrAccountToNumberAccount(accountEntry.toArray(new String[ROWS_DIGITS]));
             addAccountToNumberAccountsList(account);
         }
-
         writeNumberAccountsOutputFile();
-        
     }
 
 
@@ -120,7 +118,6 @@ public class BankOCR {
             for (String account : numberAccountsList) {
                 writer.write(account + "\n");
             }
-            
             writer.close();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
