@@ -59,15 +59,9 @@ public class BankOCRTest {
         expectedResult.add("128456789 ERR");
         expectedResult.add("12345678? ILL");
         expectedResult.add("123456789");
-        bankOCR.addAccountToNumberAccountsList("128456789");       
-        bankOCR.addAccountToNumberAccountsList("12345678?");       
-        bankOCR.addAccountToNumberAccountsList("123456789");       
+        bankOCR.addAccountToNumberAccountsList("128456789");
+        bankOCR.addAccountToNumberAccountsList("12345678?");
+        bankOCR.addAccountToNumberAccountsList("123456789");
         assertEquals(expectedResult, bankOCR.getNumberAccountsList());
-    }
-
-    @Test
-    public void testBankOCR() throws IOException {
-        bankOCR.ocrAccountToNumberAccount();
-        
     }
 }

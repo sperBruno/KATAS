@@ -14,11 +14,18 @@ public class BankOCR {
     private static final int COLS_DIGITS = 3;
     private static final int ROWS_DIGITS = 3;
     private static final int NUMBER_DIGITS = 9;
+    private static final String ILLEGIBLE_NUMBER = "?";
+    private static final String ILLEGIBLE_MESSAGE = "ILLEGIBLE_MESSAGE";
+    private static final String ERROR_MESSAGE = "ERROR_MESSAGE";
 
-    private List<String> numberAccountsList = new ArrayList<String>();
+    private List<String> numberAccountsList;
+
+    public BankOCR() {
+        numberAccountsList = new ArrayList<String>();
+    }
 
     public void ocrAccountToNumberAccount() throws IOException {
-        ArrayList<String> ocrAccountsList = readAccountOcrFile(INPUT_FILE_NAME);
+        List<String> ocrAccountsList = readAccountOcrFile(INPUT_FILE_NAME);
 
         for (int line = 0; line < ocrAccountsList.size(); line += ROWS_DIGITS + 1) {
             List<String> accountEntry = ocrAccountsList.subList(line, line + ROWS_DIGITS);
@@ -27,10 +34,11 @@ public class BankOCR {
         }
 
         writeNumberAccountsOutputFile();
+        
     }
 
 
-    public ArrayList<String> readAccountOcrFile(String fileName) throws IOException {
+    public List<String> readAccountOcrFile(String fileName) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(fileName);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
         String line;
@@ -77,17 +85,17 @@ public class BankOCR {
         } else if (Arrays.equals(ocrDigit, Digit.NINE)) {
             return "9";
         } else {
-            return "?";
+            return ILLEGIBLE_NUMBER;
         }
     }
 
     public void addAccountToNumberAccountsList(String numberAccount) {
-        if (numberAccount.contains("?")) {
-            numberAccountsList.add(String.format("%s %s", numberAccount, "ILL"));
+        if (numberAccount.contains(ILLEGIBLE_NUMBER)) {
+            numberAccountsList.add(String.format("%s %s", numberAccount, ILLEGIBLE_MESSAGE));
         } else if (isValidAccount(numberAccount)) {
             numberAccountsList.add(numberAccount);
         } else {
-            numberAccountsList.add(String.format("%s %s", numberAccount, "ERR"));
+            numberAccountsList.add(String.format("%s %s", numberAccount, ERROR_MESSAGE));
         }
     }
 
@@ -112,6 +120,7 @@ public class BankOCR {
             for (String account : numberAccountsList) {
                 writer.write(account + "\n");
             }
+            
             writer.close();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
