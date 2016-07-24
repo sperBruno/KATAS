@@ -2,7 +2,9 @@ package com.fundacionjala.bankocr;
 
 
 /**
- * Created by Bruno on 7/8/2016.
+ * Class Contains all possible OCR digits
+ * 
+ * @author Bruno Barrios, Rosario Garcia
  */
 public class Digit {
 

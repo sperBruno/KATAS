@@ -2,14 +2,18 @@ package com.fundacionjala.bankocr;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 /**
- * Created by Bruno on 7/7/2016.
+ * Test for {@link BankOCR}
+ * 
+ * @author Bruno Barrios, Rosario Garcia
  */
 public class BankOCRTest {
 
@@ -23,7 +27,7 @@ public class BankOCRTest {
     @Test
     public void testReadFromFile() throws IOException {
         bankOCR.readAccountOcrFile("accountsOCR.txt");
-        ArrayList<String> expectedResult = new ArrayList<String>();
+        List<String> expectedResult = new ArrayList<String>();
         expectedResult.add("    _  _     _  _  _  _  _ ");
         expectedResult.add("  | _||_||_||_ |_   ||_||_|");
         expectedResult.add("  ||_ |_|  | _||_|  ||_| _|");
@@ -44,7 +48,7 @@ public class BankOCRTest {
                                                 "  | _| _||_||_ |_   ||_||_|",
                                                 "  ||_  _|  | _||_|  ||_| _|"};
         String expectedResult = "123456789";
-        assertEquals(expectedResult, bankOCR.convertOcrAccountToNumberAccount(accountEntry));
+        assertEquals(expectedResult, bankOCR.convertOcrAccountToNumberAccount(Arrays.asList(accountEntry)));
     }
 
     @Test
@@ -55,7 +59,7 @@ public class BankOCRTest {
 
     @Test
     public void testCheckAccount() {
-        ArrayList<String> expectedResult = new ArrayList<String>();
+        List<String> expectedResult = new ArrayList<String>();
         expectedResult.add("128456789 ERR");
         expectedResult.add("12345678? ILL");
         expectedResult.add("123456789");
