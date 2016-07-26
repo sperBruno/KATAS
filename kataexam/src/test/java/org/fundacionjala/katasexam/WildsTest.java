@@ -20,5 +20,8 @@ public class WildsTest {
         assertEquals(5, SearchEngine.find("_po_", haystack));
         assertEquals(12, SearchEngine.find("___night", haystack));
         assertEquals(29, SearchEngine.find("_hile", haystack));
+        assertEquals(29, SearchEngine.find("w_ile", haystack));
+        assertEquals(37, SearchEngine.find("pondere_", haystack));
+        assertEquals(37, SearchEngine.find("p_ndere_", haystack));
     }
 }
