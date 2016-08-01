@@ -7,7 +7,7 @@ package org.fundacionjala.katasexam;
  */
 public class EANValidator {
 
-    public static final int ONE_NUMBER = 1;
+    private static final int ONE_NUMBER = 1;
     private static final int TEN_NUMBER = 10;
     private static final int ZERO_NUMBER = 0;
 
@@ -27,13 +27,7 @@ public class EANValidator {
      * @return return the module of ten.
      */
     private static int checkSum(int sum) {
-        int checksum;
-        if (sum % TEN_NUMBER == ZERO_NUMBER) {
-            checksum = ZERO_NUMBER;
-        } else {
-            checksum = TEN_NUMBER - (sum % TEN_NUMBER);
-        }
-        return checksum;
+        return (sum % TEN_NUMBER == ZERO_NUMBER) ? ZERO_NUMBER : TEN_NUMBER - (sum % TEN_NUMBER);
     }
 
     /**

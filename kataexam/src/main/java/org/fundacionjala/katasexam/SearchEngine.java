@@ -18,7 +18,7 @@ public class SearchEngine {
     public static int find(String needed, String hayStack) {
         if (needed.contains("_")) {
             for (String word : hayStack.split(" ")) {
-                if (word.replace(",","").length() == needed.length() && validate(word, needed)) {
+                if (word.replace(",", "").length() == needed.length() && validate(word, needed)) {
                     return hayStack.indexOf(replaceWildcard(word.toCharArray(), needed.toCharArray()));
                 }
             }
@@ -27,7 +27,6 @@ public class SearchEngine {
     }
 
     private static boolean validate(String word, String needed) {
-        boolean answer = false;
         int count = 0;
         char[] charArray = needed.replace("_", "").toCharArray();
         for (int index = 0; index < charArray.length; index++) {
@@ -35,10 +34,7 @@ public class SearchEngine {
                 count++;
             }
         }
-        if (count == charArray.length) {
-            answer = true;
-        }
-        return answer;
+        return count == charArray.length;
     }
 
     private static String replaceWildcard(char[] charArray, char[] arrayNeeded) {
@@ -47,8 +43,6 @@ public class SearchEngine {
             arrayNeeded[index] = charArray[index];
             answer = answer + String.valueOf(arrayNeeded[index]);
         }
-        System.out.println(answer);
-
         return answer;
     }
 }

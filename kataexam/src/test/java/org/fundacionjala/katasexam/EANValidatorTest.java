@@ -6,9 +6,10 @@ import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by brunobarrios on 7/25/2016.
+ * @author Bruno Barrios on 7/25/2016.
  */
 public class EANValidatorTest {
+
     @Test
     public void test_01() {
         assertTrue(EANValidator.validate("9783815820865"));
